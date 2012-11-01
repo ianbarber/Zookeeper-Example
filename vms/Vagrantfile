@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant::Config.run do |config|
+  config.vm.define :zk1 do |zk1_config|
+    zk1_config.vm.box = "base"
+    zk1_config.vm.forward_port 8080, 8080
+    zk1_config.vm.network :hostonly, "192.168.12.10"
+    zk1_config.vm.share_folder("conf", "/tmp/vagrant-puppet/conf", "conf")
+    zk1_config.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "base.pp"
+      puppet.options = ["--templatedir","/tmp/vagrant-puppet/"]
+      puppet.facter = { "zookeeper_myid" => "1" }
+    end
+  end
+  
+  config.vm.define :zk2 do |zk2_config|
+    zk2_config.vm.box = "base"
+    zk2_config.vm.network :hostonly, "192.168.12.11"
+    zk2_config.vm.share_folder("conf", "/tmp/vagrant-puppet/conf", "conf")
+    zk2_config.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "base.pp"
+      puppet.options = ["--templatedir","/tmp/vagrant-puppet/"]
+      puppet.facter = { "zookeeper_myid" => "2" }
+    end
+  end
+  
+  config.vm.define :zk3 do |zk3_config|
+    zk3_config.vm.box = "base"
+    zk3_config.vm.network :hostonly, "192.168.12.12"
+    zk3_config.vm.share_folder("conf", "/tmp/vagrant-puppet/conf", "conf")
+    zk3_config.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "base.pp"
+      puppet.options = ["--templatedir","/tmp/vagrant-puppet/"]
+      puppet.facter = { "zookeeper_myid" => "3" }
+    end
+  end
+
+end

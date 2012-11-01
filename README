@@ -1,24 +1,20 @@
 Zookeeper For PHP @ PHP London
 
-Zookeeper: Originally from Yahoo, now a Apache TLP. Tool for providing a central backplane, metadata store or coordination service for distributed systems. Hierarchical (file system like) atomic database for small amounts of data, optimised for in-memory (log backed for persistance), read heavy situations. Provides global ordering consistency (everything zxid ordered), and notifications on changes. Database is like an FS path, except each level can contain both data (like files) and children (like directories). Has per-node ACL if needed. Ensembles for replication based HA/resilience. 
+Zookeeper: Originally from Yahoo, now a Apache TLP. Tool for providing a central backplane, metadata store or coordination service for distributed systems. Hierarchical (file system like) atomic database for small amounts of data, optimised for in-memory (log backed for persistence), read heavy situations. Provides global ordering consistency (everything zxid ordered), and notifications on changes. Database is like an FS path, except each level can contain both data (like files) and children (like directories). Has per-node ACL if needed. Ensembles for replication based HA/resilience. 
 
-1. register.php - register a node with a value for a DNS type service
+1. register.php - register a node with a value for a DNS type service discovery
 2. lookup.php - lookup a node
 3. register2.php - register EPHEMERAL node, for more adaptive DNS type service
-4. lookup2.php - watch for changes
-5. register3.php - add nodes to group
+4. lookup2.php - watch for changes, group rather than individual
+5. register3.php - add/remove nodes to group
 6. followtheleader.php - Group leader election
 7. followtheleader2.php - Group leader election and processing with herd avoidance
-8. readyornot.php - wait until sufficient resources to execute workflow, barrier example
+8. readyornot.php - wait until sufficient resources to execute workflow, barrier example (watch on non-existent node)
+9. talktoensemble.php - connect to an ensemble
 
 Zookeeper: http://zookeeper.apache.org/
 PHP Zookeeper: https://github.com/andreiz/php-zookeeper
 Netflix Exhibitor https://github.com/Netflix/exhibitor
 
-Things to keep in mind: Potential chance of stale data read off slow follower. If client switches server to a slower one, it will actually be refused until server catches up. Watches need to be re-registered, so not guaranteed to see all events (it's not a messaging system!). Will always see consistent data though. May have issues with very short sessions (e.g. PHP web processes) popping up and down. High levels of writes may be challenging.
-
-TODO: 
-Zookeeper ensemble
-Zookeeper sessions?
-Netflix Exhibitor
+Things to keep in mind: Potential chance of stale data read off slow follower. If client switches server to a slower one, it will actually be refused until server catches up. Watches need to be re-registered, so not guaranteed to see all events (it's not a messaging system!). Will always see consistent data though. May have issues with very short sessions (e.g. PHP web processes) popping up and down. High levels of writes may be challenging. 
 

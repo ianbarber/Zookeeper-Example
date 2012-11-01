@@ -31,7 +31,7 @@ class ZKService {
 
 $zks = new ZKService();
 $zks->cleanup("/counter");
-$zks->register("/counter", "tcp://localhost:1337");
+$zks->register("/counter", "tcp://otherhost:1338");
 $count = 10;
 while($count > 0) {
   echo $count--, "\n";

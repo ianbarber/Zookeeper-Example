@@ -22,7 +22,7 @@ class ZKService {
 }
 
 $zks = new ZKService();
-$zks->register("tcp://localhost:" . rand(1025, 65534));
+$zks->register("tcp://myhost:" . rand(1025, 65534));
 $count = 10;
 while($count > 0) {
   echo $count--, "\n";
