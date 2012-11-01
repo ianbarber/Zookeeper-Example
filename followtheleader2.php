@@ -60,7 +60,7 @@ class ZKLeader {
     	    sleep(1);
     			echo rand(1, 100), "\n";
     	  }
-    	  echo "Mein lieben!\n";
+    	  echo "Mein leben!\n";
   			die();
   		} else {
 		    sleep(1);
