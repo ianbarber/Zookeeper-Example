@@ -28,7 +28,7 @@ class ZKLeader {
 		echo "Checking my status...\n";
 		$children = $this->zk->getChildren("/writers");
 		// Check for existance of node with lower id
-		$best_id = 99999;
+		$best_id = $this->id;
 		foreach($children as $c) {
 			list($path, $id) = explode("node-", $c);
 			if(intval($id) < intval($this->id) && intval($id) < intval($best_id)) {
@@ -36,7 +36,7 @@ class ZKLeader {
 			}
 		}
 
-		if($best_id == 99999) {
+		if($best_id == $this->id) {
 			// If no node, I am the writer! go ahead
 			echo "I am the leader!\n";
 			$this->is_leader = true;
@@ -60,7 +60,7 @@ class ZKLeader {
     	    sleep(1);
     			echo rand(1,100), "\n";
     	  }
-    	  echo "Mein lieben!\n";
+    	  echo "Mein leben!\n";
   			die();
   		} else {
 		    sleep(1);

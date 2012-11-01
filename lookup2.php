@@ -18,7 +18,8 @@ class ZKWatcher {
 
 	public function children_cb($event, $key, $path) {
 		echo "\nChildren for $path\n";
-		$children = $this->zk->getChildren($path, array($this, 'children_cb'));
+		$children = $this->zk->getChildren($path, 
+		                  array($this, 'children_cb'));
 		var_dump($children);
 	}
 
